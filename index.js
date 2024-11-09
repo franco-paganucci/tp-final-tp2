@@ -3,7 +3,6 @@ import routes from "./routes/index.js";
 import { notFound } from "./middlewares/notFound.js";
 import connection from "./connection/connection.js";
 import { SERVER_PORT } from "./config/config.js";
-import connection from "./connection/connection.js";
 import userSeed from './seed/userSeed.js';
 
 
