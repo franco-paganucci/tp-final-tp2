@@ -1,7 +1,7 @@
 import express from "express";
 import routes from "./routes/index.js";
 import { notFound } from "./middlewares/notFound.js";
-// import connection from "./connection/connection.js";
+import connection from "./connection/connection.js";
 import { SERVER_PORT } from "./config/config.js";
 
 
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // midlewares
-
+await connection.sync({ alter: true });
 app.use(routes);
 app.use(notFound);
 

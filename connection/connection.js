@@ -1,9 +1,14 @@
 import { Sequelize } from "sequelize";
+import  { DB_NAME, DB_DIALECT, DB_HOST, DB_PASS, DB_PORT, DB_USER} from "../config/config.js"
 
-const connection = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
-    port: process.env.DB_PORT
+const connection = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
+    host: DB_HOST,
+    dialect: DB_DIALECT,
+    port: DB_PORT,
+    dialectOptions: {
+        encrypt: false,
+        trustServerCertificate: true, 
+      },
 });
 
 try {
