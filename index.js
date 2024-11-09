@@ -3,6 +3,8 @@ import routes from "./routes/index.js";
 import { notFound } from "./middlewares/notFound.js";
 import connection from "./connection/connection.js";
 import { SERVER_PORT } from "./config/config.js";
+import connection from "./connection/connection.js";
+import userSeed from './seed/userSeed.js';
 
 
 // creo el server
@@ -18,6 +20,9 @@ app.use(express.json());
 await connection.sync({ alter: true });
 app.use(routes);
 app.use(notFound);
+
+await connection.sync({ force: true });
+// await userSeed(); FIX NEEDED HERE
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

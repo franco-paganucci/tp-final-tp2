@@ -19,7 +19,7 @@ class UserService {
     }
 
 
-  getAllUser = async () => {
+  getAllUsers = async () => {
     try {
       const users = await User.findAll({
         attributes: ["name", "mail", "address"],
