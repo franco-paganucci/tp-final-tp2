@@ -24,8 +24,8 @@ class UserController {
 
     createUser = async (req, res) => {
         try {
-            const {name, password, email, direccion} = req.body
-            const data = await this.userService.createUser({name, password, email, direccion})
+            const {name, password, mail, address} = req.body
+            const data = await this.userService.createUser({name, password, mail, address})
             res.status(200).send({success: true, message: data})
         } catch (error) {
             res.status(200).send({success: false, message: error.message})
@@ -35,8 +35,8 @@ class UserController {
     updateUser = async (req, res) => {
         try {
             const {Id} = req.params
-            const {name, mail, password, direccion} = req.body 
-            const data = await this.userService.updateUser({Id, name, mail, password, direccion})
+            const {name, mail, password, address} = req.body 
+            const data = await this.userService.updateUser({Id, name, mail, password, address})
             res.status(200).send({success: true, message: data})
         } catch (error) {
             res.status(200).send({success: false, message: error.message})
@@ -54,4 +54,4 @@ class UserController {
     }
 }
 
-export default UserController
+export default UserController;

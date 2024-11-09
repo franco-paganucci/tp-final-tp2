@@ -1,4 +1,4 @@
-import { User } from "../models/User";
+import User from "../models/User.js";
 
 class UserService {
 
@@ -19,7 +19,7 @@ class UserService {
     }
 
 
-  getAllUser = async () => {
+  getAllUsers = async () => {
     try {
       const users = await User.findAll({
         attributes: ["name", "mail", "address"],
