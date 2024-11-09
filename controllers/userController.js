@@ -1,12 +1,11 @@
-// user service
-import userService from "../services/userService.js"
+import userService from "../services/UserService.js"
 
 class UserController {
     userService = new userService()
 
     getAllUsers = async (req, res) => {
         try {
-            const data = await this.userService.getAllUsersService()
+            const data = await this.userService.getAllUsers()
             res.status(200).send({success: true, message: data})
         } catch (error) {
             res.status(200).send({success: false, message: error.message})
@@ -16,7 +15,7 @@ class UserController {
     getUserById = async (req, res) => {
         try {
             const {Id} = req.params
-            const data = await this.userService.getUserByIdService(Id)
+            const data = await this.userService.getUserById(Id)
             res.status(200).send({success: true, message: data})
         } catch (error) {
             res.status(200).send({success: false, message: error.message})
@@ -26,7 +25,7 @@ class UserController {
     createUser = async (req, res) => {
         try {
             const {name, password, email, direccion} = req.body
-            const data = await this.userService.createUserService({name, password, email, direccion})
+            const data = await this.userService.createUser({name, password, email, direccion})
             res.status(200).send({success: true, message: data})
         } catch (error) {
             res.status(200).send({success: false, message: error.message})
@@ -37,7 +36,7 @@ class UserController {
         try {
             const {Id} = req.params
             const {name, mail, password, direccion} = req.body 
-            const data = await this.userService.updateUserService({Id, name, mail, password, direccion})
+            const data = await this.userService.updateUser({Id, name, mail, password, direccion})
             res.status(200).send({success: true, message: data})
         } catch (error) {
             res.status(200).send({success: false, message: error.message})
@@ -47,7 +46,7 @@ class UserController {
     deleteUser = async (req, res) => {
         try {
             const {Id} = req.params
-            const data = await this.userService.deleteUserService(Id)
+            const data = await this.userService.deleteUser(Id)
             res.status(200).send({success: true, message: data})
         } catch (error) {
             res.status(200).send({success: false, message: error.message})
