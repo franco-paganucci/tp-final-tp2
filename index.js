@@ -16,11 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // midlewares
-await connection.sync({ alter: true });
 app.use(routes);
 app.use(notFound);
 
-await connection.sync({ force: true });
+await connection.sync({ alter: true });
 // await userSeed(); FIX NEEDED HERE
 
 app.listen(port, () => {
