@@ -4,7 +4,7 @@ class OrderItemService {
 
   getAllOrderItems = async () => {
     try {
-      const orders = await Order.findAll({
+      const orders = await OrderItem.findAll({
         attributes: ["id", "price", "orderId", "productId", "quantity"]
       });
       return orders;
@@ -47,7 +47,7 @@ class OrderItemService {
     }
   };
 
-  deleteOrder = async (id) => {
+  deleteOrderItem = async (id) => {
     throw new Error("No se puede realizar esta acción");
     // try {
     //     const order = await OrderItem.update(

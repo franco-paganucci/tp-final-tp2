@@ -8,7 +8,8 @@ User.hasMany(Order);
 Order.belongsTo(User)
 Order.hasMany(OrderItem)
 OrderItem.belongsTo(Order)
-OrderItem.hasMany(Product)
+OrderItem.belongsTo(Product)
+Product.hasMany(OrderItem)
 
 // Order.addHook('afterSave', async (order) => {
 //     const totalPrice = await OrderItem.sum('price', {
