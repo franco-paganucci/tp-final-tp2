@@ -12,12 +12,21 @@ OrderItem.init(
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false
-    }
+    },
+    orderId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+    productId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
   },
   {
     sequelize: connection,
     modelName: "OrderItem",
-  }
+  },
+  
 );
 
 export default OrderItem;

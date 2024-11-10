@@ -4,12 +4,15 @@ import Product from "./Product.js";
 import Order from "./Order.js";
 import OrderItem from "./OrderItem.js";
 
-User.hasMany(Order);
-Order.belongsTo(User)
-Order.hasMany(OrderItem)
-OrderItem.belongsTo(Order)
-OrderItem.belongsTo(Product)
-Product.hasMany(OrderItem)
+User.hasMany(Order, { foreignKey: 'userId' });
+Order.belongsTo(User, { foreignKey: 'userId' })
+Order.hasMany(OrderItem, {
+    foreignKey: 'orderId',  // Aquí defines la clave foránea en camelCase
+    onDelete: 'CASCADE',
+  });
+OrderItem.belongsTo(Order, { foreignKey: 'orderId' })
+OrderItem.belongsTo(Product, { foreignKey: 'productId'})
+Product.hasMany(OrderItem, { foreignKey: 'productId' })
 
 // Order.addHook('afterSave', async (order) => {
 //     const totalPrice = await OrderItem.sum('price', {

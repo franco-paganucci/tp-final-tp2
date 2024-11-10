@@ -38,7 +38,7 @@ class OrderItemController {
         try {
             const { quantity } = req.body;
             const { id } = req.params;
-            const data = await this.service.updateOrderItem({ quantity, productId, id});
+            const data = await this.service.updateOrderItem({ quantity, id});
             res.status(200).send({ success: true, message: data });
         } catch (error) {
             res.status(400).send({ success: false, message: error.message });

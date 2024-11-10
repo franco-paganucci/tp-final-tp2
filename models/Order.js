@@ -16,6 +16,10 @@ Order.init(
     price: {
       type: DataTypes.DECIMAL,
       allowNull: false,
+    },
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
   },
   {
