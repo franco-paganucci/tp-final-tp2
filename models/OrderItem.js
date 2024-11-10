@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import connection from "../connection/connection.js";
+import Product from "./Product.js";
 
 class OrderItem extends Model {}
 
@@ -28,5 +29,6 @@ OrderItem.init(
   },
   
 );
+
 
 export default OrderItem;

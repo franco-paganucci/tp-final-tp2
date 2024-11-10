@@ -1,4 +1,4 @@
-import { Order } from "../models/models.js";
+import { Order, OrderItem } from "../models/models.js";
 
 class OrderService {
 
@@ -17,6 +17,7 @@ class OrderService {
       const orders = await Order.findAll({
         where: { id },
         attributes: ["id", "price", "state"],
+        include: { model: OrderItem }
       });
       return orders;
     } catch (error) {
