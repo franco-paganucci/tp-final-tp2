@@ -8,7 +8,7 @@ class UserController {
             const data = await this.userService.getAllUsers()
             res.status(200).send({success: true, message: data})
         } catch (error) {
-            res.status(200).send({success: false, message: error.message})
+            res.status(400).send({success: false, message: error.message})
         }
     }
 
@@ -18,7 +18,7 @@ class UserController {
             const data = await this.userService.getUserById(Id)
             res.status(200).send({success: true, message: data})
         } catch (error) {
-            res.status(200).send({success: false, message: error.message})
+            res.status(400).send({success: false, message: error.message})
         }
     }
 
@@ -28,7 +28,7 @@ class UserController {
             const data = await this.userService.createUser({name, password, mail, address})
             res.status(200).send({success: true, message: data})
         } catch (error) {
-            res.status(200).send({success: false, message: error.message})
+            res.status(400).send({success: false, message: error.message})
         }
     }
 
@@ -39,7 +39,7 @@ class UserController {
             const data = await this.userService.updateUser({Id, name, mail, password, address})
             res.status(200).send({success: true, message: data})
         } catch (error) {
-            res.status(200).send({success: false, message: error.message})
+            res.status(400).send({success: false, message: error.message})
         }
     }
 
@@ -49,7 +49,7 @@ class UserController {
             const data = await this.userService.deleteUser(Id)
             res.status(200).send({success: true, message: data})
         } catch (error) {
-            res.status(200).send({success: false, message: error.message})
+            res.status(400).send({success: false, message: error.message})
         }
     }
 }
