@@ -3,11 +3,11 @@ import connection from "../connection/connection.js";
 import bcrypt from "bcrypt";
 
 class User extends Model {
-    compare = async (myPlaintextPassword) => {
-        const data = await bcrypt.compare(myPlaintextPassword, this.password);
-        return data
-      };
-};
+  compare = async (myPlaintextPassword) => {
+    const data = await bcrypt.compare(myPlaintextPassword, this.password);
+    return data;
+  };
+}
 
 User.init(
   {
@@ -43,10 +43,10 @@ User.init(
 );
 
 User.beforeCreate(async (user) => {
-    const salt = await bcrypt.genSalt(10);
-    user.salt = salt;
-    const hash = await bcrypt.hash(user.password, salt);
-    user.password = hash;
-  });
+  const salt = await bcrypt.genSalt(10);
+  user.salt = salt;
+  const hash = await bcrypt.hash(user.password, salt);
+  user.password = hash;
+});
 
 export default User;
