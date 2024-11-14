@@ -41,6 +41,7 @@ class UserService {
   };
 
   createUser = async (user) => {
+    // que por default se creen como clientes (usaríamos un seed especial para crear usuarios de admin)
     try {
       const newUser = await User.create(user);
       return newUser;

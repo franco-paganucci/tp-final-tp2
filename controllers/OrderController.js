@@ -23,6 +23,7 @@ class OrderController {
     };
 
     createOrder = async (req, res) => {
+        // mover esta lógica al servicio? en general para todos los controllers, es algo a revisar
         try {
             const { userId, price = 0.0 } = req.body;
             const data = await this.service.createOrder({

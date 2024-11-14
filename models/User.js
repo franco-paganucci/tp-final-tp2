@@ -43,10 +43,20 @@ User.init(
 );
 
 User.beforeCreate(async (user) => {
-  const salt = await bcrypt.genSalt(10);
+  const salt = await bcrypt.genSalt(10); 
   user.salt = salt;
   const hash = await bcrypt.hash(user.password, salt);
   user.password = hash;
 });
+
+User.beforeBulkCreate(async (users) => {
+  for (const user of users) {
+    const salt = await bcrypt.genSalt(10);
+    user.salt = salt;
+    const hash = await bcrypt.hash(user.password, salt);
+    user.password = hash;
+  }
+});
+
 
 export default User;

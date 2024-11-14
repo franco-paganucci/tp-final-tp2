@@ -8,7 +8,7 @@
     "start": "node --env-file .env .",
     "dev": "node --env-file .env --watch .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "userSeed": "node --env-file .env.dev ./seed/userSeed.js"
+    "userSeed": "node --env-file .env ./seed/userSeed.js"
   },
   "author": "",
   "license": "ISC",
