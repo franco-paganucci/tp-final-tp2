@@ -31,7 +31,7 @@ class UserController {
         mail,
         address,
       });
-      res.status(200).send({ success: true, message: data });
+      res.status(201).send({ success: true, message: data });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -56,8 +56,8 @@ class UserController {
 
   deleteUser = async (req, res) => {
     try {
-      const { Id } = req.params;
-      const data = await this.userService.deleteUser(Id);
+      const { id } = req.params;
+      const data = await this.userService.deleteUser(id);
       res.status(200).send({ success: true, message: data });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
