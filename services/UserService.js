@@ -20,7 +20,7 @@ class UserService {
   getAllUsers = async () => {
     try {
       const users = await User.findAll({
-        attributes: ["name", "mail", "address"],
+        attributes: ["id","name", "mail", "address"],
       });
       return users;
     } catch (error) {
@@ -62,9 +62,18 @@ class UserService {
     }
   };
 
-  // implementar soft deletes ? Necesitaríamos una columna deleted_at
   deleteUser = async (id) => {
-    return `deleteUserService ${id}`;
+    try {
+      const deletedUser = await User.destroy({
+        where: { id: id },
+      });
+      if (deletedUser === 0) {
+        throw new Error("User not found");
+      }
+      return { message: "User soft deleted successfully" };
+    } catch (error) {
+      throw error;
+    }
   };
 }
 

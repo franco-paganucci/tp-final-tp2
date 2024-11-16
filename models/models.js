@@ -1,4 +1,4 @@
-// import Role from "./Role.js";
+import Role from "./Role.js";
 import User from "./User.js";
 import Product from "./Product.js";
 import Order from "./Order.js";
@@ -14,6 +14,9 @@ Order.hasMany(OrderItem, {
 OrderItem.belongsTo(Order, { foreignKey: 'orderId' })
 OrderItem.belongsTo(Product, { foreignKey: 'productId'})
 Product.hasMany(OrderItem, { foreignKey: 'productId' })
+
+Role.hasMany(User, { foreignKey: "roleId", as: "users" });
+User.belongsTo(Role, { foreignKey: "roleId", as: "role" });
 
 const updateOrderPrice = async (orderItem, options) => {
     try {
@@ -48,7 +51,7 @@ OrderItem.addHook('beforeCreate', setOrderItemPrice);
 
 OrderItem.addHook('afterCreate', updateOrderPrice);
 
-export { Product, User, Order, OrderItem }
+export { Product, User, Order, OrderItem, Role }
 
 
 

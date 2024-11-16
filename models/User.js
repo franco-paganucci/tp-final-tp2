@@ -35,10 +35,16 @@ User.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true
+    }
   },
   {
     sequelize: connection,
     modelName: "users",
+    paranoid: true, // soft delete de sequelize
+    timestamps: true, 
   }
 );
 
