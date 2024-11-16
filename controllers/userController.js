@@ -24,12 +24,13 @@ class UserController {
 
   createUser = async (req, res) => {
     try {
-      const { name, password, mail, address } = req.body;
+      const { name, password, mail, address, roleId } = req.body;
       const data = await this.userService.createUser({
         name,
         password,
         mail,
         address,
+        roleId
       });
       res.status(201).send({ success: true, message: data });
     } catch (error) {
@@ -39,14 +40,15 @@ class UserController {
 
   updateUser = async (req, res) => {
     try {
-      const { Id } = req.params;
-      const { name, mail, password, address } = req.body;
+      const { id } = req.params;
+      const { name, mail, password, address, roleId } = req.body;
       const data = await this.userService.updateUser({
-        Id,
+        id,
         name,
         mail,
         password,
         address,
+        roleId
       });
       res.status(200).send({ success: true, message: data });
     } catch (error) {
