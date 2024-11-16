@@ -17,6 +17,7 @@ class RoleService {
             const role = await Role.findOne({
                 where: { id }
             })
+            return role;
         } catch (error) {
             throw error;
         }
@@ -33,10 +34,10 @@ class RoleService {
 
     updateRole = async (body) => {
         try {
-            const { roleId, name, description } = body;
+            const { id, name, description } = body;
             const updatedRole = await Role.update(
               { name, description },
-              { where: { id: roleId } }
+              { where: { id } }
             );
             return updatedRole;
           } catch (error) {
@@ -44,10 +45,10 @@ class RoleService {
           }
     }
 
-    deleteRole = async (roleId) => {
+    deleteRole = async (id) => {
         try {
           const deletedRole = await Role.destroy({
-            where: { id: roleId },
+            where: { id: id },
           });
           if (deletedRole === 0) {
             throw new Error("Role not found");
