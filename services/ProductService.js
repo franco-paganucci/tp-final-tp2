@@ -2,10 +2,12 @@ import { Product } from "../models/models.js";
 
 class ProductService {
 
-  getAllProducts = async () => {
+  getAllProducts = async (role) => {
     try {
+      const filter = role === 'admin' ? {} : {active: true}
       const products = await Product.findAll({
-        attributes: ["id", "name", "price", "description", "stock", "image"]
+        attributes: ["id", "name", "price", "description", "stock", "image"],
+        where: filter
       });
       return products;
     } catch (error) {
