@@ -5,10 +5,11 @@ class ProductController {
 
     getAllProducts = async (req, res) => {
         try {
-        const data = await this.service.getAllProducts();
-        res.status(200).send({ success: true, message: data });
+            const {role} = req.user
+            const data = await this.service.getAllProducts(role);
+            res.status(200).send({ success: true, message: data });
         } catch (error) {
-        res.status(400).send({ success: false, message: error.message });
+            res.status(400).send({ success: false, message: error.message });
         }
     };
 
