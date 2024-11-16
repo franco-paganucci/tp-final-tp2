@@ -20,7 +20,7 @@ class UserService {
   getAllUsers = async () => {
     try {
       const users = await User.findAll({
-        attributes: ["id","name", "mail", "address"],
+        attributes: ["id","name", "mail", "address", "roleId"],
       });
       return users;
     } catch (error) {
@@ -32,7 +32,7 @@ class UserService {
     try {
       const user = await User.findOne({
         where: { id: id },
-        attributes: ["name", "mail", "address"],
+        attributes: ["name", "mail", "address", "roleId"],
       });
       return user;
     } catch (error) {
@@ -51,9 +51,9 @@ class UserService {
 
   updateUser = async (data) => {
     try {
-      const { id, name, password, email, address } = data;
+      const { id, name, password, email, address, roleId } = data;
       const updatedUser = await User.update(
-        { name, password, email, address },
+        { name, password, email, address, roleId },
         { where: { id } }
       );
       return updatedUser;
