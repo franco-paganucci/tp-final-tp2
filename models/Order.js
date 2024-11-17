@@ -10,7 +10,7 @@ class Order extends Model {
 Order.init(
   {
     state: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     price: {

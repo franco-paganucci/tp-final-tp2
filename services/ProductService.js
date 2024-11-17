@@ -4,9 +4,9 @@ class ProductService {
 
   getAllProducts = async (role) => {
     try {
-      const filter = role === 'admin' ? {} : {active: true}
+      const filter = role === 'ADMIN' ? {} : {active: true}
       const products = await Product.findAll({
-        attributes: ["id", "name", "price", "description", "stock", "image"],
+        attributes: ["id", "name", "price", "description", "stock", "image", "active"],
         where: filter
       });
       return products;

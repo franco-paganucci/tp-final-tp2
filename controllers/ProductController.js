@@ -1,3 +1,4 @@
+import { ROLES } from "../constants/contants.js";
 import ProductService from "../services/ProductService.js";
 class ProductController {
 
@@ -5,7 +6,10 @@ class ProductController {
 
     getAllProducts = async (req, res) => {
         try {
-            const {role} = req.user
+            // const {role} = req.user 
+            //esto debe salir del jwt y para el get hay que filtrar para traer solo los activos si el user es cliente
+        // se saca del jwt y se hace rol === ROLES.ADMIN || rol === ROLES.EMPLOYEE? ... : ... la constante roles ya esta importada
+            const role = [ROLES.ADMIN] // aca toma el valor de la key y mno del value
             const data = await this.service.getAllProducts(role);
             res.status(200).send({ success: true, message: data });
         } catch (error) {
