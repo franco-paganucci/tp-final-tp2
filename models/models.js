@@ -2,6 +2,7 @@ import Role from "./Role.js";
 import User from "./User.js";
 import Product from "./Product.js";
 import Order from "./Order.js";
+import OrderState from "./OrderState.js";
 import OrderItem from "./OrderItem.js";
 
 User.hasMany(Order, { foreignKey: 'userId' });
@@ -10,11 +11,11 @@ Order.hasMany(OrderItem, {
     foreignKey: 'orderId',
     onDelete: 'CASCADE',
 });
-
+OrderState.hasMany(Order, { foreignKey: 'state'})
+Order.belongsTo(OrderState, { foreignKey: 'state'})
 OrderItem.belongsTo(Order, { foreignKey: 'orderId' })
 OrderItem.belongsTo(Product, { foreignKey: 'productId'})
 Product.hasMany(OrderItem, { foreignKey: 'productId' })
-
 Role.hasMany(User, { foreignKey: "roleId", as: "users" });
 User.belongsTo(Role, { foreignKey: "roleId", as: "role" });
 
@@ -51,7 +52,7 @@ OrderItem.addHook('beforeCreate', setOrderItemPrice);
 
 OrderItem.addHook('afterCreate', updateOrderPrice);
 
-export { Product, User, Order, OrderItem, Role }
+export { Product, User, Order, OrderItem, Role, OrderState }
 
 
 

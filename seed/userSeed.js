@@ -2,13 +2,37 @@ import User from "../models/User.js";
 
 async function userSeed() {
   try {
+
     await User.bulkCreate([
-      { name: "Juan Pérez" },
-      { address: "Av. De Mayo 123" },
-      { mail: "ejemplo_usuario@mail.com" },
-      { password: "password123" },
-    ]);
-  } catch (error) {}
+      {
+        name: "Andy",
+        mail: "andy@mail.com",
+        password: "password123",
+        address: "123 Calle Falsa, Ciudad, País",
+        roleId: 2 // EMPLOYEE (roleId = 2)
+      },
+      {
+        name: "Francisco",
+        mail: "francisco@mail.com",
+        password: "password456",
+        address: "456 Avenida Real, Ciudad, País",
+        roleId: 1, // ADMIN (roleId = 1)
+      },
+      {
+        name: "Franco",
+        mail: "franco@mail.com",
+        password: "password789", 
+        address: "789 Camino Antiguo, Ciudad, País",
+        roleId: 1, // ADMIN (roleId = 1)
+      }
+    ], {
+      individualHooks: true 
+    });
+
+    console.log('Usuarios insertados correctamente');
+  } catch (error) {
+    console.error("Error al insertar usuarios:", error);
+  }
 }
 
 export default userSeed;

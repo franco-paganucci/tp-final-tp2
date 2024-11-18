@@ -24,9 +24,9 @@ class OrderController {
 
     createOrder = async (req, res) => {
         try {
-            const { userId, price = 0.0 } = req.body;
+            const { userId, } = req.body;
             const data = await this.service.createOrder({
-                userId, state: "En preparación", price
+                userId, state: 1, price: 0
             });
             res.status(200).send({ success: true, message: data });
         } catch (error) {

@@ -4,6 +4,9 @@ import { notFound } from "./middlewares/notFound.js";
 import connection from "./connection/connection.js";
 import { SERVER_PORT } from "./config/config.js";
 import userSeed from './seed/userSeed.js';
+import roleSeed from "./seed/roleSeed.js";
+import productSeed from "./seed/productSeed.js";
+import orderStateSeed from "./seed/orderStateSeed.js";
 
 
 // creo el server
@@ -19,8 +22,11 @@ app.use(express.json());
 app.use(routes);
 app.use(notFound);
 
-await connection.sync({ alter: true });
-// await userSeed(); FIX NEEDED HERE
+await connection.sync({ alter: true, force: true });
+await roleSeed();
+await userSeed();
+await productSeed();
+await orderStateSeed();
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
