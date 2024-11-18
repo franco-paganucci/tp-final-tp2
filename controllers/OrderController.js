@@ -12,6 +12,16 @@ class OrderController {
         }
     };
 
+    getOrdersByUserId = async (req, res) => {
+        try {
+            const { role, id: userId } = req.user;  // JWT
+            const data = await this.service.getOrdersByUserId(userId, role);
+            res.status(200).send({ success: true, message: data });
+        } catch (error) {
+            res.status(400).send({ success: false, message: error.message });
+        }
+    };
+
     getOrderById = async (req, res) => {
     try {
         const { id } = req.params;

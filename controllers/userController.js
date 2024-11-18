@@ -3,6 +3,15 @@ import userService from "../services/UserService.js";
 class UserController {
   userService = new userService();
 
+  userLogin = async (req, res) => {
+    try {
+      const result = await this.userService.loginService(req.body);
+      res.json({success: true, message: result});
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
+
   getAllUsers = async (req, res) => {
     try {
       const data = await this.userService.getAllUsers();

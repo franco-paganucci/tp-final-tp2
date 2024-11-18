@@ -12,6 +12,21 @@ class OrderService {
       throw error;
     }
   };
+
+  getOrdersByUserId = async (userId, role) => {
+    try {
+        const filter = role === "CLIENT" ? { userId } : {};
+        
+        const orders = await Order.findAll({
+            where: filter,
+            attributes: ["id", "userId", "state", "price"],
+        });
+        return orders;
+    } catch (error) {
+        throw error;
+    }
+};
+
   getOrderById = async (id) => {
     try {
       const orders = await Order.findAll({
