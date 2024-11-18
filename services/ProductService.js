@@ -4,27 +4,41 @@ class ProductService {
 
   getAllProducts = async (role) => {
     try {
-      const filter = role === 'ADMIN' ? {} : {active: true}
+      const filter = role === "ADMIN" || role === "EMPLOYEE" ? {} : { active: true };
+      
       const products = await Product.findAll({
         attributes: ["id", "name", "price", "description", "stock", "image", "active"],
-        where: filter
+        where: filter,
       });
+  
       return products;
     } catch (error) {
       throw error;
     }
   };
-  getProductById = async (id) => {
+  
+  getProductById = async (id, role) => {
     try {
-      const products = await Product.findAll({
-        where: { id },
-        attributes: ["id", "name", "price", "description", "stock", "image"],
+      const filter = 
+        role === "ADMIN" || role === "EMPLOYEE" 
+          ? { id } 
+          : { id, active: true };
+  
+      const product = await Product.findOne({
+        where: filter,
+        attributes: ["id", "name", "price", "description", "stock", "image", "active"],
       });
-      return products;
+  
+      if (!product) {
+        throw new Error("Product not found or access restricted.");
+      }
+  
+      return product;
     } catch (error) {
       throw error;
     }
   };
+  
 
   createProduct = async (product) => {
     try {

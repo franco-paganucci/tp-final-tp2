@@ -1,21 +1,35 @@
 import { User } from "../models/models.js";
+import jwt from "jsonwebtoken";
 
 class UserService {
-  loginService = async (user) => {
-    try {
-      const { mail, pass } = user;
-
-      const userLogin = await User.findOne({ where: { mail } });
-      if (!userLogin) throw new Error(`User with email ${mail} not found`);
-
-      const comparePassword = await userLogin.compare(password);
-      if (!comparePassword) throw new Error(`Wrong Password.`);
-
-      return userLogin;
-    } catch (error) {
-      throw error;
+  loginService = async (body) => {
+    const { mail, pass } = body;
+  
+    if (!mail || !pass || mail.length < 1 || pass.length < 1) {
+      throw new Error("Email address and password are required.");
     }
+  
+    const userLogin = await User.findOne({ where: { mail } });
+    if (!userLogin) {
+      throw new Error("Invalid email or password.");
+    }
+  
+    const comparePassword = await userLogin.compare(pass);
+    if (!comparePassword) {
+      throw new Error("Invalid email or password.");
+    }
+    const token = jwt.sign(
+      { id: userLogin.id, 
+        roleId: userLogin.roleId, 
+        userEmail: userLogin.mail 
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "3h" }
+    );
+  
+    return { user: { id: userLogin.id, mail: userLogin.mail, roleId: userLogin.roleId }, token };
   };
+  
 
   getAllUsers = async () => {
     try {

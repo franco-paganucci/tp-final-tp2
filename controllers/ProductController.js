@@ -6,26 +6,26 @@ class ProductController {
 
     getAllProducts = async (req, res) => {
         try {
-            // const {role} = req.user 
-            //esto debe salir del jwt y para el get hay que filtrar para traer solo los activos si el user es cliente
-        // se saca del jwt y se hace rol === ROLES.ADMIN || rol === ROLES.EMPLOYEE? ... : ... la constante roles ya esta importada
-            const role = [ROLES.ADMIN] // aca toma el valor de la key y mno del value
-            const data = await this.service.getAllProducts(role);
+            const { role } = req.user;  // Trae el rol del jwt
+            const data = await this.service.getAllProducts(role);  // Usa el rol en la lógica del servicio
             res.status(200).send({ success: true, message: data });
         } catch (error) {
             res.status(400).send({ success: false, message: error.message });
         }
     };
+    
 
     getProductById = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const data = await this.service.getProductById(id);
-        res.status(200).send({ success: true, message: data });
-    } catch (error) {
-        res.status(400).send({ success: false, message: error.message });
-    }
+        try {
+            const { id } = req.params;
+            const { role } = req.user;
+            const data = await this.service.getProductById(id, role);
+            res.status(200).send({ success: true, message: data });
+        } catch (error) {
+            res.status(400).send({ success: false, message: error.message });
+        }
     };
+    
 
     createProduct = async (req, res) => {
         try {
