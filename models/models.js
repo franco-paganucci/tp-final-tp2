@@ -32,6 +32,7 @@ const updateOrderPrice = async (orderItem, options) => {
       }
     } catch (error) {
       console.error('Error calculating price for Order:', error);
+      throw error;
     }
 }
 
@@ -39,18 +40,39 @@ const setOrderItemPrice = async (orderItem, options) => {
     try {
       const product = await Product.findByPk(orderItem.productId);
       if (product) {
+        if (product.stock < orderItem.quantity) {
+          throw new Error('Insufficient stock');
+        }
         orderItem.price = product.price * orderItem.quantity;
       } else {
         throw new Error('Product not found');
       }
     } catch (error) {
       console.error('Error calculating price for OrderItem:', error);
+      throw error;
     }
+}
+
+const updateProductStock = async (orderItem, options) => {
+  try {
+    const product = await Product.findByPk(orderItem.productId);
+    if (product) {
+      product.stock = product.stock - orderItem.quantity;
+      await product.save()
+    } else {
+      throw new Error('Product not found');
+    }
+  } catch (error) {
+    console.error('Error calculating price for OrderItem:', error);
+    throw error;
+  }
 }
 
 OrderItem.addHook('beforeCreate', setOrderItemPrice);
 
 OrderItem.addHook('afterCreate', updateOrderPrice);
+
+OrderItem.addHook('afterCreate', updateProductStock);
 
 export { Product, User, Order, OrderItem, Role, OrderState }
 
