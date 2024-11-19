@@ -12,6 +12,20 @@ async function userSeed() {
         roleId: 2 // EMPLOYEE (roleId = 2)
       },
       {
+        name: "Andy",
+        mail: "andres@mail.com",
+        password: "password123",
+        address: "123 Calle Falsa, Ciudad, País",
+        roleId: 3 // CLIENT (roleId = 3)
+      },
+      {
+        name: "Andy",
+        mail: "cliente@mail.com",
+        password: "password123",
+        address: "123 Calle Falsa, Ciudad, País",
+        roleId: 3 // CLIENT (roleId = 3)
+      },
+      {
         name: "Francisco",
         mail: "francisco@mail.com",
         password: "password456",

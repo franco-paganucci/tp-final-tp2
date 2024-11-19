@@ -33,13 +33,13 @@ class UserController {
 
   createUser = async (req, res) => {
     try {
-      const { name, password, mail, address, roleId } = req.body;
+      const { name, password, mail, address } = req.body;
       const data = await this.userService.createUser({
         name,
         password,
         mail,
         address,
-        roleId
+        roleId: 3
       });
       res.status(201).send({ success: true, message: data });
     } catch (error) {

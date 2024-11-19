@@ -5,7 +5,8 @@ class OrderController {
 
     getAllOrders = async (req, res) => {
         try {
-        const data = await this.service.getAllOrders();
+        const { id: userId, roleId } = req.user;
+        const data = await this.service.getAllOrders(userId, roleId);
         res.status(200).send({ success: true, message: data });
         } catch (error) {
         res.status(400).send({ success: false, message: error.message });
@@ -14,8 +15,8 @@ class OrderController {
 
     getOrdersByUserId = async (req, res) => {
         try {
-            const { role, id: userId } = req.user;  // JWT
-            const data = await this.service.getOrdersByUserId(userId, role);
+            const { roleId, id: userId } = req.user;  // JWT
+            const data = await this.service.getOrdersByUserId(userId, roleId);
             res.status(200).send({ success: true, message: data });
         } catch (error) {
             res.status(400).send({ success: false, message: error.message });
@@ -24,8 +25,9 @@ class OrderController {
 
     getOrderById = async (req, res) => {
     try {
+        const { roleId, id: userId } = req.user;  // JWT
         const { id } = req.params;
-        const data = await this.service.getOrderById(id);
+        const data = await this.service.getOrderById(id, userId, roleId);
         res.status(200).send({ success: true, message: data });
     } catch (error) {
         res.status(400).send({ success: false, message: error.message });
@@ -34,7 +36,7 @@ class OrderController {
 
     createOrder = async (req, res) => {
         try {
-            const { userId, } = req.body;
+            const { id: userId, } = req.user;
             const data = await this.service.createOrder({
                 userId, state: 1, price: 0
             });
@@ -57,8 +59,9 @@ class OrderController {
 
     deleteOrder = async (req, res) => {
         try {
+            const { roleId, id: userId } = req.user;  // JWT
             const { id } = req.params;
-            const data = await this.service.deleteOrder(id);
+            const data = await this.service.deleteOrder(id, userId, roleId);
             res.status(200).send({ success: true, message: data });
         } catch (error) {
             res.status(400).send({ success: false, message: error.message });
