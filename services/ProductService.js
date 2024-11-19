@@ -1,10 +1,11 @@
+import { ROLES } from "../constants/contants.js";
 import { Product } from "../models/models.js";
 
 class ProductService {
 
-  getAllProducts = async (role) => {
+  getAllProducts = async (roleId) => {
     try {
-      const filter = role === "ADMIN" || role === "EMPLOYEE" ? {} : { active: true };
+      const filter = roleId === ROLES.CLIENT ? { active: true } : {}
       
       const products = await Product.findAll({
         attributes: ["id", "name", "price", "description", "stock", "image", "active"],
@@ -17,13 +18,9 @@ class ProductService {
     }
   };
   
-  getProductById = async (id, role) => {
+  getProductById = async (id, roleId) => {
     try {
-      const filter = 
-        role === "ADMIN" || role === "EMPLOYEE" 
-          ? { id } 
-          : { id, active: true };
-  
+      const filter = roleId === ROLES.CLIENT ? { id, active: true } : { id }  
       const product = await Product.findOne({
         where: filter,
         attributes: ["id", "name", "price", "description", "stock", "image", "active"],

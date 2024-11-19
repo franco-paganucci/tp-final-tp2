@@ -1,5 +1,5 @@
 import { Router } from "express";
-import UserController from "../controllers/UserController.js";
+import UserController from "../controllers/userController.js";
 import validateToken from "../middlewares/jwtGuard.js";
 import adminOrEmployeesOnly from "../middlewares/adminOrEmployeesOnly.js";
 import adminsOnly from "../middlewares/adminOnly.js";

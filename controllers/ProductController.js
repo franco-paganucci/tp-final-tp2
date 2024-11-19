@@ -1,4 +1,3 @@
-import { ROLES } from "../constants/contants.js";
 import ProductService from "../services/ProductService.js";
 class ProductController {
 
@@ -6,8 +5,8 @@ class ProductController {
 
     getAllProducts = async (req, res) => {
         try {
-            const { role } = req.user;  // Trae el rol del jwt
-            const data = await this.service.getAllProducts(role);  // Usa el rol en la lógica del servicio
+            const { roleId } = req.user;  // Trae el rol del jwt
+            const data = await this.service.getAllProducts(roleId);  // Usa el rol en la lógica del servicio
             res.status(200).send({ success: true, message: data });
         } catch (error) {
             res.status(400).send({ success: false, message: error.message });
@@ -18,8 +17,8 @@ class ProductController {
     getProductById = async (req, res) => {
         try {
             const { id } = req.params;
-            const { role } = req.user;
-            const data = await this.service.getProductById(id, role);
+            const { roleId } = req.user;
+            const data = await this.service.getProductById(id, roleId);
             res.status(200).send({ success: true, message: data });
         } catch (error) {
             res.status(400).send({ success: false, message: error.message });

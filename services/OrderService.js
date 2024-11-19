@@ -1,10 +1,13 @@
+import { ROLES } from "../constants/contants.js";
 import { Order, OrderItem } from "../models/models.js";
 
 class OrderService {
 
-  getAllOrders = async () => {
+  getAllOrders = async (userId, roleId) => {
+    const filter = roleId === ROLES.CLIENT ? { userId } : {};
     try {
       const orders = await Order.findAll({
+        where: filter,
         attributes: ["id", "price", "state"]
       });
       return orders;
@@ -13,10 +16,9 @@ class OrderService {
     }
   };
 
-  getOrdersByUserId = async (userId, role) => {
+  getOrdersByUserId = async (userId, roleId) => {
     try {
-        const filter = role === "CLIENT" ? { userId } : {};
-        
+      const filter = roleId === ROLES.CLIENT ? { userId } : {};
         const orders = await Order.findAll({
             where: filter,
             attributes: ["id", "userId", "state", "price"],
@@ -27,10 +29,11 @@ class OrderService {
     }
 };
 
-  getOrderById = async (id) => {
+  getOrderById = async (id, userId, roleId) => {
+    const filter = roleId === ROLES.CLIENT ? { userId, id } : { id };
     try {
       const orders = await Order.findAll({
-        where: { id },
+        where: filter,
         attributes: ["id", "price", "state"],
         include: { model: OrderItem }
       });
@@ -63,12 +66,13 @@ class OrderService {
     }
   };
 
-  deleteOrder = async (id) => {
+  deleteOrder = async (id, userId, roleId) => {
+    const filter = roleId === ROLES.CLIENT ? { userId, id } : { id }
     try {
         const order = await Order.update(
-          { state: 'cancel' },
+          { state: 5 },
           {
-            where: { id },
+            where: filter
           }
         );
         return order;

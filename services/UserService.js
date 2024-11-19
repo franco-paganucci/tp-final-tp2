@@ -3,9 +3,8 @@ import jwt from "jsonwebtoken";
 
 class UserService {
   loginService = async (body) => {
-    const { mail, pass } = body;
-  
-    if (!mail || !pass || mail.length < 1 || pass.length < 1) {
+    const { mail, password } = body;
+    if (!mail || !password || mail.length < 1 || password.length < 1) {
       throw new Error("Email address and password are required.");
     }
   
@@ -14,7 +13,7 @@ class UserService {
       throw new Error("Invalid email or password.");
     }
   
-    const comparePassword = await userLogin.compare(pass);
+    const comparePassword = await userLogin.compare(password);
     if (!comparePassword) {
       throw new Error("Invalid email or password.");
     }
