@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(routes);
 app.use(notFound);
 
-await connection.sync({ alter: true, force: true });
+await connection.sync();
 await roleSeed();
 await userSeed();
 await productSeed();
