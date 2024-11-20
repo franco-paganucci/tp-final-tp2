@@ -165,7 +165,7 @@ For development, it is recommended to run the app in dev mode so it watches for 
 ```
 
 #### **PUT /**
-**Description**: Update user details (Admins only).
+**Description**: Update user details.
 
 **Params**
 - **id**: string
