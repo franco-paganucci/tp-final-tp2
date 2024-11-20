@@ -20,7 +20,7 @@
 ## Prerequisites
 
 - **Node.js**: v16.x or later
-- **MySQL**: 8.x or compatible
+- MySQL: 8.x or compatible (or any other supported database by modifying the connection configuration in Sequelize, i.e. SQL Server).
 - **Environment Variables**: Configure a `.env` file with the following variables:
   ```env
   DB_NAME=your_database_name
