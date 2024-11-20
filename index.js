@@ -23,10 +23,10 @@ app.use(routes);
 app.use(notFound);
 
 await connection.sync();
-await roleSeed();
-await userSeed();
-await productSeed();
-await orderStateSeed();
+// await roleSeed();
+// await userSeed();
+// await productSeed();
+// await orderStateSeed();
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
