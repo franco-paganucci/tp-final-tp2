@@ -133,14 +133,7 @@ For development, it is recommended to run the app in dev mode so it watches for 
 ```
 
 #### **POST /**
-**Description**: Create a new user.
-
-**Headers**
-```json
-{
-    "Authorization": "Bearer jwt_token"
-}
-```
+**Description**: Create (register) a new user.
 
 **Request Body**:
 ```json
